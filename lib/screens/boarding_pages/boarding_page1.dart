@@ -36,16 +36,13 @@ class VerticalView extends StatelessWidget {
           height: height * 0.1348,
         ),
         Expanded(
-          flex: 8,
+          flex: 3,
           child: Image.asset(
             image,
             fit: BoxFit.cover,
           ),
         ),
-        const Expanded(
-          flex: 1,
-          child: SizedBox(),
-        ),
+        SizedBox(height: height * 0.03),
         Expanded(
           flex: 4,
           child: FittedBox(
@@ -76,7 +73,6 @@ class HorizontalView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 5,
           child: Row(
             children: [
               Expanded(
@@ -110,6 +106,7 @@ class HorizontalView extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: height * 0.2),
       ],
     );
   }

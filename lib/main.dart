@@ -48,35 +48,32 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            Expanded(
-              flex: 10,
-              child: PageView(
-                controller: PageController(initialPage: 0),
-                scrollDirection: Axis.horizontal,
-                onPageChanged: (value) {
-                  _page = value;
-                  setState(() {});
-                },
-                pageSnapping: true,
-                children: const [
-                  BoardingPage1(),
-                  BoardingPage2(),
-                  BoardingPage3(),
-                  BoardingPage4(),
-                  BoardingPage5(),
-                  BoardingPage6(),
-                ],
-              ),
+            PageView(
+              controller: PageController(initialPage: 0),
+              scrollDirection: Axis.horizontal,
+              onPageChanged: (value) {
+                _page = value;
+                setState(() {});
+              },
+              pageSnapping: true,
+              children: const [
+                BoardingPage1(),
+                BoardingPage2(),
+                BoardingPage3(),
+                BoardingPage4(),
+                BoardingPage5(),
+                BoardingPage6(),
+              ],
             ),
-            const Expanded(flex: 1, child: SizedBox()),
-            Expanded(
-              flex: 1,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
+                  Expanded(
                     child: ConstrainedBox(
                       constraints: const BoxConstraints.expand(height: 22),
                       child: Center(
@@ -110,9 +107,6 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.12,
             ),
           ],
         ),
