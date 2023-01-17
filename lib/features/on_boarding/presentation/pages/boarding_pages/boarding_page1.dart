@@ -1,20 +1,18 @@
-import 'package:boarding_screen/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const String image = 'assets/images/Tasks.png';
+import '../../../../../constants.dart';
+
+const String image = 'assets/images/Business Plan.png';
 const String caption =
-    'Refer other stores to avail cashbacks \nyourself.\n\nCustomers don’t get to have all the fun.';
+    'Use the business portal to track\n your order flow and total earnings.';
 double height = 601;
-int page = 4;
 
-class BoardingPage4 extends StatelessWidget {
-  const BoardingPage4({super.key});
-
+class BoardingPage1 extends StatelessWidget {
+  const BoardingPage1({super.key});
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
-
     return OrientationBuilder(
       builder: (context, orientation) {
         if (orientation == Orientation.portrait && height > 600) {
@@ -76,7 +74,6 @@ class HorizontalView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 5,
           child: Row(
             children: [
               Expanded(

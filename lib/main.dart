@@ -1,13 +1,15 @@
-import 'package:boarding_screen/screens/boarding_pages/boarding_page1.dart';
-import 'package:boarding_screen/screens/boarding_pages/boarding_page2.dart';
-import 'package:boarding_screen/screens/boarding_pages/boarding_page3.dart';
-import 'package:boarding_screen/screens/boarding_pages/boarding_page4.dart';
-import 'package:boarding_screen/screens/boarding_pages/boarding_page5.dart';
-import 'package:boarding_screen/screens/boarding_pages/boarding_page6.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants.dart';
+import 'features/on_boarding/presentation/bloc/cubit/page_swipe_cubit.dart';
+import 'features/on_boarding/presentation/pages/boarding_pages/boarding_page1.dart';
+import 'features/on_boarding/presentation/pages/boarding_pages/boarding_page2.dart';
+import 'features/on_boarding/presentation/pages/boarding_pages/boarding_page3.dart';
+import 'features/on_boarding/presentation/pages/boarding_pages/boarding_page4.dart';
+import 'features/on_boarding/presentation/pages/boarding_pages/boarding_page5.dart';
+import 'features/on_boarding/presentation/pages/boarding_pages/boarding_page6.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,22 +30,19 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home: BlocProvider(
+        create: (context) => PageSwipeCubit(),
+        child: const Home(),
+      ),
     );
   }
 }
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int _page = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,8 +54,7 @@ class _HomeState extends State<Home> {
               controller: PageController(initialPage: 0),
               scrollDirection: Axis.horizontal,
               onPageChanged: (value) {
-                _page = value;
-                setState(() {});
+                BlocProvider.of<PageSwipeCubit>(context).pageSwipe(value);
               },
               pageSnapping: true,
               children: const [
@@ -87,18 +85,22 @@ class _HomeState extends State<Home> {
                           ),
                           itemBuilder: (context, position) {
                             int i = position;
-                            return DottedBorder(
-                              borderType: BorderType.Circle,
-                              dashPattern: const [5],
-                              color: i == _page
-                                  ? kPrimaryColor
-                                  : Colors.transparent,
-                              child: CircleAvatar(
-                                radius: i == _page ? 9 : 7,
-                                backgroundColor: i == _page
-                                    ? kPrimaryColor
-                                    : kSecondaryColor,
-                              ),
+                            return BlocBuilder<PageSwipeCubit, int>(
+                              builder: (context, state) {
+                                return DottedBorder(
+                                  borderType: BorderType.Circle,
+                                  dashPattern: const [5],
+                                  color: i == state
+                                      ? kPrimaryColor
+                                      : Colors.transparent,
+                                  child: CircleAvatar(
+                                    radius: i == state ? 9 : 7,
+                                    backgroundColor: i == state
+                                        ? kPrimaryColor
+                                        : kSecondaryColor,
+                                  ),
+                                );
+                              },
                             );
                           },
                         ),

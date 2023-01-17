@@ -1,15 +1,16 @@
-import 'package:boarding_screen/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const String image = 'assets/images/Globe.png';
-const String caption =
-    'You just took the first step to make your \nstore an a worldwide brand.\n\nWelcome to Tharasis.';
-double height = 601;
-int page = 6;
+import '../../../../../constants.dart';
 
-class BoardingPage6 extends StatelessWidget {
-  const BoardingPage6({super.key});
+const String image = 'assets/images/Business Plan.png';
+const String caption =
+    'Use the business portal to track \nyour order flow and total earnings. \n\nLet us focus on getting you new \nand loyal customers.';
+double height = 601;
+int page = 5;
+
+class BoardingPage5 extends StatelessWidget {
+  const BoardingPage5({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +81,14 @@ class HorizontalView extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
+                flex: 1,
                 child: Image.asset(
                   image,
                   fit: BoxFit.scaleDown,
                 ),
               ),
               Expanded(
+                flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
